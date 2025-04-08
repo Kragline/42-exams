@@ -49,9 +49,9 @@ int ft_printf(const char *format, ... )
 	}
 	return (va_end(pointer), length);
 }
-/*
+
 int main()
 {
 	printf("%s %d %x\n", "abcd", 256, 17);
 	ft_printf("%s %d %x", "abcd", 256, 17);
-}*/
+}

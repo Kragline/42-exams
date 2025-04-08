@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <fcntl.h>
 
 #ifndef BUFFER_SIZE
 #define BUFFER_SIZE  42
@@ -86,33 +87,25 @@ char *get_next_line(int fd)
 	}
 	line[c_copied] = '\0';
 	return (line);
-
 }
-#include <fcntl.h>
-#include <stdio.h>
 
 int main() {
     int fd;
     char *line;
 
-    fd = open("file.txt", O_RDONLY);
+    fd = open("get_next_line.c", O_RDONLY);
     if (fd == -1) {
         perror("Error opening file");
         return 1;
     }
 	line = get_next_line(fd);
-	printf("--%s\n", line);
-    free(line);
-    line = NULL;
-	line = get_next_line(fd);
-	printf("--%s\n", line);
-    free(line);
-    line = NULL;
-	line = get_next_line(fd);
-	printf("--%s\n", line);
-    free(line);
-    line = NULL;
-
+	while (line)
+	{
+		printf("%s", line);
+		free(line);
+		line = NULL;
+		line = get_next_line(fd);
+	}
     close(fd);
     return 0;
 }
