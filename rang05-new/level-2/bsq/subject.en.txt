@@ -4,7 +4,8 @@ Allowed functions and globals: malloc, calloc, realloc, free, fopen, fclose,
 getline, fscanf, fputs, fprintf, stderr, stdout, stdin, errno
 --------------------------------------------------------------------------------
 
-The aim of this program is to find the biggest square on a map, avoiding obstacles.
+The aim of this program is to find the biggest square on a map, avoiding obstacles
+.
 A file containing the map will be provided. It'll have to be passed as an argument for your program.
 The first line of the map contains information on how to read the map (space separated) :
  - The number of lines on the map;
