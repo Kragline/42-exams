@@ -44,12 +44,16 @@ static int load_body(FILE *f, t_map *map)
     while ((len = getline(&line, &n, f)) != -1)
     {
         /* Skip the empty lines */
-        if (len == 1 && line[0] == '\n')
+        if ((len == 1 && line[0] == '\n'))
             continue;
 
         /* Remove trailing newline (if any) */
         if (line[len - 1] == '\n')
             line[--len] = '\0';
+        
+        /* Skip leftover after the first */        
+        if (row == 0 && is_all_space(line))
+            continue;
 
         if (row >= map->rows)
         {

@@ -25,5 +25,6 @@ void    print_map(t_map *map);
 
 /* Utils */
 void    map_error(void);
+int     is_all_space(char *line);
 
 #endif
