@@ -15,6 +15,7 @@
 // "wrapping" (sarama) işlemi, genellikle bir sınıfın (class) başka bir sınıfı,
 // fonksiyonu ya da veriyi içine alarak bir arayüz (interface) sağlaması anlamına gelir.
 // REFERANSLA SARMA
+#include <cstddef>
 class set
 {
 	private:
@@ -24,7 +25,7 @@ class set
 		set(const set& source) = delete;
 		set& operator=(const set& source) = delete;
 		set(searchable_bag& s_bag);
-
+size_t a;
 		bool has(int) const;
 		void insert (int);
 		void insert (int *, int);

@@ -4,14 +4,24 @@
 
 /* -------------------- INTERNAL HELPERS -------------------- */
 
-static int parse_first_line(char *line, t_map *map)
+static int parse_first_line(FILE *f, t_map *map)
 {
-    int count = sscanf(line, "%d %c %c %c",
-                       &map->rows, &map->empty, &map->obstacle, &map->full);
+    map->rows = 0;
+    map->cols = 0;
+    map->grid = NULL;
 
-    if (count != 4 || map->rows < 1)
+    /* Read: number empty obstacle full */
+    int count = fscanf(f, "%d %c %c %c",
+                       &map->rows,
+                       &map->empty,
+                       &map->obstacle,
+                       &map->full);
+
+    /* Could not parse header */
+    if (count != 4 || map->rows <= 0)
         return 0;
 
+    /* Validate characters */
     if (map->empty == map->obstacle ||
         map->empty == map->full ||
         map->obstacle == map->full)
@@ -33,7 +43,7 @@ static int load_body(FILE *f, t_map *map)
 
     while ((len = getline(&line, &n, f)) != -1)
     {
-        /* Skip blank lines */
+        /* Skip the empty lines */
         if (len == 1 && line[0] == '\n')
             continue;
 
@@ -89,29 +99,11 @@ int read_map(const char *filename, t_map *map)
     if (!f)
         return 0;
 
-    char *line = NULL;
-    size_t n = 0;
-
-    map->rows = 0;
-    map->cols = 0;
-    map->grid = NULL;
-
-    ssize_t len = getline(&line, &n, f);
-    if (len == -1)
+    if (!parse_first_line(f, map))
     {
-        free(line);
         fclose(f);
         return 0;
     }
-
-    if (!parse_first_line(line, map))
-    {
-        free(line);
-        fclose(f);
-        return 0;
-    }
-
-    free(line);
 
     if (!load_body(f, map))
     {
@@ -127,27 +119,8 @@ int read_map(const char *filename, t_map *map)
 
 int read_map_stdin(t_map *map)
 {
-    char *line = NULL;
-    size_t n = 0;
-
-    map->rows = 0;
-    map->cols = 0;
-    map->grid = NULL;
-
-    ssize_t len = getline(&line, &n, stdin);
-    if (len == -1)
-    {
-        free(line);
+    if (!parse_first_line(stdin, map))
         return 0;
-    }
-
-    if (!parse_first_line(line, map))
-    {
-        free(line);
-        return 0;
-    }
-
-    free(line);
 
     return load_body(stdin, map);
 }
