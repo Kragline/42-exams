@@ -5,6 +5,10 @@ int main(int argc, char **argv)
 	if (argc == 1)
 	{
 		t_map	map;
+
+		map.rows = 0;
+		map.cols = 0;
+		map.grid = NULL;
 		if (read_map_stdin(&map) && solve_bsq(&map))
 			print_map(&map);
 		else
@@ -17,6 +21,9 @@ int main(int argc, char **argv)
 	{
 		t_map	map;
 
+		map.rows = 0;
+		map.cols = 0;
+		map.grid = NULL;
 		if (read_map(argv[i], &map) && solve_bsq(&map))
 			print_map(&map);
 		else

@@ -6,10 +6,6 @@
 
 static int	parse_first_line(FILE *f, t_map *map)
 {
-	map->rows = 0;
-	map->cols = 0;
-	map->grid = NULL;
-
 	/* Read: number empty obstacle full */
 	int count = fscanf(f, "%d %c %c %c", &map->rows, &map->empty, &map->obstacle, &map->full);
 
