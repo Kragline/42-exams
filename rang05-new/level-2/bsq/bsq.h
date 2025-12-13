@@ -3,7 +3,7 @@
 
 # include <stdlib.h>
 # include <stdio.h>
-# include <errno.h>
+# include <limits.h>
 
 typedef struct s_map
 {
@@ -23,9 +23,5 @@ void	free_map(t_map *map);
 /* Solver */
 int		solve_bsq(t_map *map);
 void	print_map(t_map *map);
-
-/* Utils */
-void	map_error(void);
-int		is_all_space(char *line);
 
 #endif

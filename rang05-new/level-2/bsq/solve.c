@@ -51,12 +51,3 @@ int	solve_bsq(t_map *map)
 
 	return (1);
 }
-
-void	print_map(t_map *map)
-{
-	for (int i = 0; i < map->rows; i++)
-	{
-		fputs(map->grid[i], stdout);
-		fputc('\n', stdout);
-	}
-}

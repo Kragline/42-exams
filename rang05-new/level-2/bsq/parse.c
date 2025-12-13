@@ -4,16 +4,60 @@
 
 /* -------------------- INTERNAL HELPERS -------------------- */
 
+static int	ft_atoi(const char *str)
+{
+	int	sign;
+	int	res;
+
+	sign = 1;
+	res = 0;
+	
+	if (*str == '-')
+	{
+		sign *= -1;
+		str++;
+	}
+	else if (*str == '+')
+		str++;
+	while (*str && (*str >= '0' && *str <= '9'))
+	{
+		res = res * 10 + (*str - '0');
+		str++;
+	}
+	return (sign * res);
+}
+
 static int	parse_first_line(FILE *f, t_map *map)
 {
-	/* Read: number empty obstacle full */
-	int count = fscanf(f, "%d %c %c %c", &map->rows, &map->empty, &map->obstacle, &map->full);
+	char *line = NULL;
+	size_t n = 0;
 
-	/* Could not parse header */
-	if (count != 4 || map->rows <= 0)
+	ssize_t	len = getline(&line, &n, f);
+	if (line[len - 1] == '\n')
+		line[--len] = '\0';
+	
+	map->rows = ft_atoi(line);
+	if (map->rows <= 0)
+		return (0);
+	int	i = 0;
+	while (line[i] && line[i] >= '0' && line[i] <= '9')
+		i++;
+
+	if (line[i] == '\0')
+		return (0);
+	map->empty = line[i];
+	
+	if (line[i + 1] == '\0')
+		return (0);
+	map->obstacle = line[++i];
+	
+	if (line[i + 1] == '\0')
+		return (0);
+	map->full = line[++i];
+
+	if (line[i + 1] != '\0')
 		return (0);
 
-	/* Validate characters */
 	if (map->empty == map->obstacle ||
 		map->empty == map->full ||
 		map->obstacle == map->full)
@@ -35,17 +79,13 @@ static int	load_body(FILE *f, t_map *map)
 
 	while ((len = getline(&line, &n, f)) != -1)
 	{
-		/* Skip the empty lines */
+		/* Skip the empty lines (not sure about this one by the way) */
 		if ((len == 1 && line[0] == '\n'))
 			continue;
 
 		/* Remove trailing newline (if any) */
 		if (line[len - 1] == '\n')
 			line[--len] = '\0';
-		
-		/* Skip leftover after the first line (if ther is any)*/
-		if (row == 0 && is_all_space(line))
-			continue;
 
 		if (row >= map->rows)
 		{
