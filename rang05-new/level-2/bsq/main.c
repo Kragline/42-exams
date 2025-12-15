@@ -22,9 +22,6 @@ int main(int argc, char **argv)
 	map.rows = 0;
 	map.cols = 0;
 	map.grid = NULL;
-	map.empty = '\0';
-	map.obstacle = '\0';
-	map.full = '\0';
 
 	if (argc == 1)
 	{

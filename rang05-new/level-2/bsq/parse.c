@@ -38,32 +38,32 @@ static int	parse_first_line(FILE *f, t_map *map)
 	
 	map->rows = ft_atoi(line);
 	if (map->rows <= 0)
-		return (0);
+		return (free(line), 0);
 	int	i = 0;
 	while (line[i] && line[i] >= '0' && line[i] <= '9')
 		i++;
 
 	if (line[i] == '\0')
-		return (0);
+		return (free(line), 0);
 	map->empty = line[i];
 	
 	if (line[i + 1] == '\0')
-		return (0);
+		return (free(line), 0);
 	map->obstacle = line[++i];
 	
 	if (line[i + 1] == '\0')
-		return (0);
+		return (free(line), 0);
 	map->full = line[++i];
 
 	if (line[i + 1] != '\0')
-		return (0);
+		return (free(line), 0);
 
 	if (map->empty == map->obstacle ||
 		map->empty == map->full ||
 		map->obstacle == map->full)
-		return (0);
+		return (free(line), 0);
 
-	return (1);
+	return (free(line), 1);
 }
 
 static int	load_body(FILE *f, t_map *map)
