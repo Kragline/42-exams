@@ -1,39 +1,27 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   set.hpp                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: fatkeski <fatkeski@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/27 21:42:38 by fatkeski          #+#    #+#             */
-/*   Updated: 2025/07/28 18:03:55 by fatkeski         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#pragma once
 
 #include "searchable_bag.hpp"
 
-// "wrapping" (sarama) işlemi, genellikle bir sınıfın (class) başka bir sınıfı,
-// fonksiyonu ya da veriyi içine alarak bir arayüz (interface) sağlaması anlamına gelir.
-// REFERANSLA SARMA
-#include <cstddef>
 class set
 {
-	private:
-		searchable_bag& bag;
-	public:
-		set() = delete;
-		set(const set& source) = delete;
-		set& operator=(const set& source) = delete;
-		set(searchable_bag& s_bag);
-size_t a;
-		bool has(int) const;
-		void insert (int);
-		void insert (int *, int);
-		void print() const;
-		void clear();
+private:
+	searchable_bag	&_bag;
+public:
+	set() = delete;
+	set(searchable_bag &bag);
+	set(const set &other) = delete ;
 
-		const searchable_bag& get_bag();
+	set	&operator=(const set &other) = delete ;
 
-		~set();
+	bool has(int) const ;
+	void insert(int);
+	void insert(int *, int);
+	void print() const;
+	void clear();
 
+	const searchable_bag& get_bag();
+
+	~set();
 };
+
+
