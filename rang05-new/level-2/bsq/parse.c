@@ -92,7 +92,7 @@ static int	load_body(FILE *f, t_map *map)
 	ssize_t len;
 	int row = 0;
 
-	map->grid = calloc(map->rows, sizeof(char *));
+	map->grid = calloc(map->rows + 1, sizeof(char *));
 	if (!map->grid)
 		return 0;
 
@@ -139,6 +139,7 @@ static int	load_body(FILE *f, t_map *map)
 		row++;
 	}
 
+	map->grid[row] = NULL;
 	free(line);
 	return (row == map->rows);
 }
