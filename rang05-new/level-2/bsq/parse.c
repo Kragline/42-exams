@@ -4,7 +4,7 @@
 
 /* -------------------- INTERNAL HELPERS (without fscanf) -------------------- */
 
-// use this ooe the funtions bellow
+// use this one or the funtions bellow for first line parsing
 // static int	parse_first_line(FILE *f, t_map *map)
 // {
 // 	int	count = fscanf(f, "%d %c %c %c", &map->rows, &map->empty, &map->obstacle, &map->full);
