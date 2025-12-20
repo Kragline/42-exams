@@ -2,7 +2,23 @@
 #include <string.h>
 #include <sys/types.h>
 
-/* -------------------- INTERNAL HELPERS -------------------- */
+/* -------------------- INTERNAL HELPERS (without fscanf) -------------------- */
+
+// use this ooe the funtions bellow
+// static int	parse_first_line(FILE *f, t_map *map)
+// {
+// 	int	count = fscanf(f, "%d %c %c %c", &map->rows, &map->empty, &map->obstacle, &map->full);
+
+// 	if (count != 4 || map->rows <= 0)
+// 		return (0);
+
+// 	if (map->empty == map->obstacle ||
+// 		map->empty == map->full ||
+// 		map->obstacle == map->full)
+// 		return (0);
+
+// 	return (1);
+// }
 
 static int	ft_atoi(const char *str)
 {
@@ -56,6 +72,9 @@ static int	parse_first_line(FILE *f, t_map *map)
 	map->full = line[++i];
 
 	if (line[i + 1] != '\0')
+		return (free(line), 0);
+
+	if (map->rows <= 0)
 		return (free(line), 0);
 
 	if (map->empty == map->obstacle ||

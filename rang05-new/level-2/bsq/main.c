@@ -32,7 +32,11 @@ int main(int argc, char **argv)
 			return (1);
 		}
 		if (!solve_bsq(&map))
+		{
+			free_map(&map);
+			fprintf(stdout, "Error: malloc error\n");
 			return (1);
+		}
 		print_map(&map);
 		free_map(&map);
 		return (0);
@@ -48,7 +52,11 @@ int main(int argc, char **argv)
 		return (1);
 	}
 	if (!solve_bsq(&map))
+	{
+		free_map(&map);
+		fprintf(stdout, "Error: malloc error\n");
 		return (1);
+	}
 	print_map(&map);
 	free_map(&map);
 	return (0);
