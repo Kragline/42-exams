@@ -17,33 +17,33 @@ pen do nothing in case of invalid command.
 
 once end of file is reached, your program must simulate a game of life on
 board and print the result in stdout (each cell alive will be represented l
-the character '0' and each dead cell will be represented by a space)
+the character 'O' and each dead cell will be represented by a space)
 each cell outside of the array will be considered dead.
 
 Examples:
 
 $> echo 'sdxddssaaww' | ./a.out 5 5 0 | cat -e
      $
- 000 $
- 0 0 $
- 000 $
+ OOO $
+ O O $
+ OOO $
      $
 $> echo 'sdxssdswdxdddxsaddawxwdxwaa' | ./a.out 10 6 0 | cat -e
           $
- 0   000  $
- 0     0  $
- 000  0   $
-  0  000  $
+ O   OOO  $
+ O     O  $
+ OOO  O   $
+  O  OOO  $
           $
 $> echo 'dxss' | ./a.out 3 3 0 | cat -e
- 0 $
- 0 $
- 0 $
+ O $
+ O $
+ O $
 $> echo 'dxss' | ./a.out 3 3 1 | cat -e
    $
-000$
+OOO$
    $
 $> echo 'dxss' | ./a.out 3 3 2 | cat -e
- 0 $
- 0 $
- 0 $
+ O $
+ O $
+ O $

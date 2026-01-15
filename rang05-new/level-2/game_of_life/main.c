@@ -38,7 +38,7 @@ char **start_board(char **new_board, int width, int height)
 		else if (c == 'd' && (index + 1 < width))
 			index++;
 		if (drawing)
-			new_board[array][index] = '0';
+			new_board[array][index] = 'O';
     }
 	return (new_board);
 }
@@ -67,7 +67,7 @@ int count_neighbors(char **board, int row, int col, int width, int height)
 			int nr = row + dr;
 			int nc = col + dc;
 			if (nr >= 0 && nr < height && nc >= 0 && nc < width)
-				if (board[nr][nc] == '0')
+				if (board[nr][nc] == 'O')
 					count++;
 		}
 	}
@@ -82,14 +82,14 @@ char **next_gen(char **board, int width, int height)
 		for (int col = 0; col < width; col++)
 		{
 			int neighbors = count_neighbors(board, row, col, width, height);
-			if (board[row][col] == '0')
+			if (board[row][col] == 'O')
 			{
 				if (neighbors == 2 || neighbors == 3)
-					new_board[row][col] = '0';
+					new_board[row][col] = 'O';
 			}
 			else
 				if (neighbors == 3)
-					new_board[row][col] = '0';
+					new_board[row][col] = 'O';
 		}
 	}
 	free_board(board, height);
